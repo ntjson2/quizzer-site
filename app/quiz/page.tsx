@@ -10,7 +10,6 @@ export default function QuizPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
 
   const question: Question = quizQuestions[currentQuestion];
@@ -24,10 +23,8 @@ export default function QuizPage() {
     setShowExplanation(true);
     
     if (answerIndex === question.correctAnswer) {
-      setScore(score + 1);
+      setScore(prevScore => prevScore + 1);
     }
-    
-    setAnsweredQuestions([...answeredQuestions, currentQuestion]);
   };
 
   const handleNext = () => {
@@ -45,7 +42,6 @@ export default function QuizPage() {
     setSelectedAnswer(null);
     setScore(0);
     setShowResult(false);
-    setAnsweredQuestions([]);
     setShowExplanation(false);
   };
 
